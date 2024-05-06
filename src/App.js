@@ -7,12 +7,13 @@ function App() {
     fullName: '',
     phoneNumber: '',
     sections: [
-      { id: 1, title: "Section 1 (60 Marks)", marks: 60, questions: [{ text: "Question 1", checked: false },{ text: "Question 2", checked: false },{ text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
-      { id: 2, title: "Section 2 (15 Marks)", marks: 15, questions: [{ text: "Question 1", checked: false },{ text: "Question 2", checked: false },{ text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
-      { id: 3, title: "Section 3 (15 Marks)", marks: 15, questions: [{ text: "Question 1", checked: false },{ text: "Question 2", checked: false },{ text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
-      { id: 4, title: "Section 4 (10 Marks)", marks: 10, questions: [{ text: "Question 1", checked: false },{ text: "Question 2", checked: false },{ text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
+      { id: 1, title: "Section 1 (60 Marks)", marks: 60, questions: [{ text: "Question 1", checked: false }, { text: "Question 2", checked: false }, { text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
+      { id: 2, title: "Section 2 (15 Marks)", marks: 15, questions: [{ text: "Question 1", checked: false }, { text: "Question 2", checked: false }, { text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
+      { id: 3, title: "Section 3 (15 Marks)", marks: 15, questions: [{ text: "Question 1", checked: false }, { text: "Question 2", checked: false }, { text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
+      { id: 4, title: "Section 4 (10 Marks)", marks: 10, questions: [{ text: "Question 1", checked: false }, { text: "Question 2", checked: false }, { text: "Question 3", checked: false }, { text: "Question 4", checked: false }] },
     ]
   });
+  const [marks, setMarks] = useState([]);
 
   const handleInputChange = (event) => {
     setFormData({
@@ -34,11 +35,17 @@ function App() {
       }
       return section;
     });
-    setFormData({ ...formData, sections: newSections });
+    const updatedFormData = { ...formData, sections: newSections };
+    setFormData(updatedFormData);
+
+    const newMarks = updatedFormData.sections.map(section =>
+      section.questions.filter(q => q.checked).length * (section.marks / section.questions.length)
+    );
+    setMarks(newMarks);
   };
 
   const calculateTotalScore = () => {
-    return formData.sections.reduce((total, section) => 
+    return formData.sections.reduce((total, section) =>
       total + section.questions.filter(q => q.checked).length * (section.marks / section.questions.length), 0);
   };
 
@@ -50,8 +57,29 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Do something with the form data, e.g., submit it to a server
-    console.log("Form submitted:", formData);
+
+    const values = [formData.fullName, formData.phoneNumber, ...marks]
+    writeData(values)
+    console.log("Form submitted:", values);
   };
+
+  const writeData = async (values) => {
+    try {
+      const resp = await fetch("http://127.0.0.1:8000/write", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ data: values })
+      })
+
+      const result = await resp.json()
+      console.log(result)
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className="App">
