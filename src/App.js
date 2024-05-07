@@ -65,7 +65,7 @@ function App() {
 
   const writeData = async (values) => {
     try {
-      const resp = await fetch("http://127.0.0.1:8000/write", {
+      const resp = await fetch("https://omkar.bhaskaraa45.me/sheet/write", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
