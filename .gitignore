@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Service account file
+# ./public/self-mapping-urja-2-3002af60fbc5.json
+# ./public/self-mapping-urja-84657a5b538c.json
+/src/service-account.json
