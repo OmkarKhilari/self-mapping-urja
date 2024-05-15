@@ -1,0 +1,14 @@
+.navbar {
+    background-color: #8ae180; 
+    height: 140px;
+    /* display: flex; */
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbar-title {
+    font-size: 48px;
+    color: rgb(57, 43, 43);
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
