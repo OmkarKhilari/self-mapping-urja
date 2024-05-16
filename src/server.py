@@ -11,7 +11,7 @@ app = FastAPI()
 origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://urja-self-mapping.netlify.app/"
+    "https://urja-self-mapping.netlify.app"
 ]
 
 app.add_middleware(
@@ -32,7 +32,7 @@ sheet = client.open_by_key(sheet_id).sheet1
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-@app.options("/write")
+@app.options("/write/")
 async def options_handler():
     return JSONResponse(content="OK", status_code=200)
 
