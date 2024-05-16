@@ -1,14 +1,46 @@
 .navbar {
-    background-color: #8ae180; 
-    height: 140px;
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-  }
-  
+  background-color: #8ae180;
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-logo {
+  margin-right: 20px; 
+}
+
+.company-logo {
+  max-width: 100%; 
+  height: auto;
+}
+
+.navbar-title {
+  font-size: 48px;
+  color: rgb(57, 43, 43);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+@media only screen and (max-width: 768px) {
   .navbar-title {
-    font-size: 48px;
-    color: rgb(57, 43, 43);
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px; 
   }
-  
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar-title {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .company-logo {
+    max-width: 120px; 
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .company-logo {
+    max-width: 80px; 
+  }
+}
