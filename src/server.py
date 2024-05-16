@@ -32,6 +32,10 @@ sheet = client.open_by_key(sheet_id).sheet1
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
+@app.options("/write")
+async def options_handler():
+    return JSONResponse(content="OK", status_code=200)
+
 @app.post("/write/")
 async def write(request: Request):
     body = await request.json()
