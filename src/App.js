@@ -71,7 +71,7 @@ function App() {
     };
 
     try {
-      const response = await fetch("http://20.198.8.42/write", {
+      const response = await fetch("https://omkar.bhaskaraa45.me/sheet/write", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
